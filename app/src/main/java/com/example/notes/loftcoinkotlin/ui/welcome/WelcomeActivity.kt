@@ -12,6 +12,7 @@ import com.example.notes.loftcoinkotlin.R
 import com.example.notes.loftcoinkotlin.databinding.ActivityWelcomeBinding
 import com.example.notes.loftcoinkotlin.ui.main.MainActivity
 import com.example.notes.loftcoinkotlin.ui.splash.SPLASH_ACTIVITY_PREFERENCES
+import com.example.notes.loftcoinkotlin.ui.widget.LinePagerIndicatorDecoration
 
 
 const val KEY_SHOW_WELCOME = "KEY_SHOW_WELCOME"
@@ -29,10 +30,14 @@ class WelcomeActivity : AppCompatActivity() {
         _binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recycler.adapter = WelcomeAdapter()
-        binding.recycler.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        binding.recycler.setHasFixedSize(true)
+        with(binding.recycler) {
+            adapter = WelcomeAdapter()
+            layoutManager = LinearLayoutManager(this@WelcomeActivity, RecyclerView.HORIZONTAL, false)
+            setHasFixedSize(true)
+            addItemDecoration(LinePagerIndicatorDecoration(this@WelcomeActivity))
+        }
         snapHelper.attachToRecyclerView(binding.recycler)
+
         preferences = getSharedPreferences(SPLASH_ACTIVITY_PREFERENCES, Context.MODE_PRIVATE)
 
         binding.btnStart.setOnClickListener {
@@ -43,7 +48,6 @@ class WelcomeActivity : AppCompatActivity() {
                 .apply()
             finish()
         }
-
     }
 
     override fun onDestroy() {
