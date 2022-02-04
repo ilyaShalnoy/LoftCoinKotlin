@@ -13,7 +13,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/title"
-        android:layout_marginBottom="64dp" />
+        android:layout_marginBottom="64dp"
+        android:contentDescription="@string/image_welcome_activity" />
 
     <TextView
         android:id="@+id/title"
@@ -37,8 +38,7 @@
         android:lines="3"
         android:textAppearance="?attr/textAppearanceHeadline4"
         android:textColor="@color/blue_grey"
-        android:textStyle=""
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

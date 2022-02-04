@@ -13,19 +13,13 @@ import com.example.notes.loftcoinkotlin.R
 @SuppressLint("ResourceAsColor")
 class LinePagerIndicatorDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
-    private var activePaint: Paint = Paint()
-    private var inactivePaint: Paint = Paint()
-
-    private val dm by lazy {
-        context.resources.displayMetrics
-    }
-
-    private val indicatorRadius by lazy {
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4f, dm)
-    }
+    private val activePaint: Paint = Paint()
+    private val inactivePaint: Paint = Paint()
+    private var indicatorRadius: Float = 0f
 
     init {
-
+        val dm = context.resources.displayMetrics
+        indicatorRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4f, dm)
         with(activePaint) {
             color = Color.WHITE
             style = Paint.Style.FILL

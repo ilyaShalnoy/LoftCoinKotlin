@@ -20,23 +20,17 @@ const val KEY_SHOW_WELCOME = "KEY_SHOW_WELCOME"
 class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var preferences: SharedPreferences
+    private lateinit var snapHelper: PagerSnapHelper
     private var _binding: ActivityWelcomeBinding? = null
     private val binding
         get() = _binding!!
-    private val snapHelper = PagerSnapHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        with(binding.recycler) {
-            adapter = WelcomeAdapter()
-            layoutManager = LinearLayoutManager(this@WelcomeActivity, RecyclerView.HORIZONTAL, false)
-            setHasFixedSize(true)
-            addItemDecoration(LinePagerIndicatorDecoration(this@WelcomeActivity))
-        }
-        snapHelper.attachToRecyclerView(binding.recycler)
+        initializationRecyclerView()
 
         preferences = getSharedPreferences(SPLASH_ACTIVITY_PREFERENCES, Context.MODE_PRIVATE)
 
@@ -48,6 +42,18 @@ class WelcomeActivity : AppCompatActivity() {
                 .apply()
             finish()
         }
+    }
+
+    private fun initializationRecyclerView() {
+        with(binding.recycler) {
+            adapter = WelcomeAdapter()
+            layoutManager = LinearLayoutManager(this@WelcomeActivity, RecyclerView.HORIZONTAL, false)
+            setHasFixedSize(true)
+            addItemDecoration(LinePagerIndicatorDecoration(this@WelcomeActivity))
+        }
+
+        snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recycler)
     }
 
     override fun onDestroy() {

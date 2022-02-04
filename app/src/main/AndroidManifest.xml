@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LoftCoinKotlin">
-        <activity android:name=".ui.welcome.WelcomeActivity"></activity>
+        <activity android:name=".ui.welcome.WelcomeActivity" />
         <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"

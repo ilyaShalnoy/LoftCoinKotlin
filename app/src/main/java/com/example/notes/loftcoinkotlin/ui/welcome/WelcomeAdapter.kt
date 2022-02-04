@@ -1,5 +1,6 @@
 package com.example.notes.loftcoinkotlin.ui.welcome
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,9 +36,7 @@ class WelcomeAdapter : RecyclerView.Adapter<WelcomeAdapter.WelcomeViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: WelcomeViewHolder, position: Int) {
-        holder.binding.image.setImageResource(IMG[position])
-        holder.binding.title.setText(TITLES[position])
-        holder.binding.subtitle.setText(SUBTITLES[position])
+        holder.bind(position)
     }
 
     override fun getItemCount(): Int {
@@ -50,10 +49,14 @@ class WelcomeAdapter : RecyclerView.Adapter<WelcomeAdapter.WelcomeViewHolder>() 
     }
 
 
-    class WelcomeViewHolder(val binding: WelcomePageBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class WelcomeViewHolder(private val binding: WelcomePageBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        fun bind(position: Int) {
+            binding.image.setImageResource(IMG[position])
+            binding.title.setText(TITLES[position])
+            binding.subtitle.setText(SUBTITLES[position])
+        }
     }
-
 
 }
 
