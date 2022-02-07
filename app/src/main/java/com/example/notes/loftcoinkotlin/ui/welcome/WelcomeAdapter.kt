@@ -17,13 +17,11 @@ class WelcomeAdapter : RecyclerView.Adapter<WelcomeAdapter.WelcomeViewHolder>() 
         R.drawable.welcome_page_2,
         R.drawable.welcome_page_3
     )
-
     private val TITLES = arrayOf(
         R.string.welcome_page_1_title,
         R.string.welcome_page_2_title,
         R.string.welcome_page_3_title
     )
-
     private val SUBTITLES = arrayOf(
         R.string.welcome_page_1_subtitle,
         R.string.welcome_page_2_subtitle,

@@ -30,7 +30,20 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextAppearance.AppCompat.H5">
+        <item name="android:textSize">11sp</item>
+    </style>
 
+    <style name="Theme.AppBarOverlay" parent = "ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
 
+    <style name="Theme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+
+    <style name="Theme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">?attr/colorPrimaryVariant</item>
+        <item name="itemIconTint">@color/bottom_nav_colored_item</item>
+        <item name="itemTextColor">@color/bottom_nav_colored_item</item>
+    </style>
 
 </resources>

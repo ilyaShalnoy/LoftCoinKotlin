@@ -33,5 +33,14 @@
     <string name="image_splash_activity">image splash activity</string>
     <string name="app_logo">App logo</string>
     <string name="image_welcome_activity">image welcome activity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_wallets_bottom_menu">Кошельки</string>
+    <string name="title_rates_bottom_menu">Курс</string>
+    <string name="title_converter_bottom_menu">Конвертер</string>
+    <string name="wallets_fragment_label">Кошельки</string>
+    <string name="converter_fragment_label">Конвертер</string>
+    <string name="rates_fragment_label">Общий анализ</string>
+    <string name="description_img_icon_crypto_card">img icon crypto card</string>
 
 </resources>

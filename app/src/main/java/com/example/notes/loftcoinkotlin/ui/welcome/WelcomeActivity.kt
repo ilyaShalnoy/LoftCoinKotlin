@@ -21,13 +21,11 @@ class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var preferences: SharedPreferences
     private lateinit var snapHelper: PagerSnapHelper
-    private var _binding: ActivityWelcomeBinding? = null
-    private val binding
-        get() = _binding!!
+    private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initializationRecyclerView()
