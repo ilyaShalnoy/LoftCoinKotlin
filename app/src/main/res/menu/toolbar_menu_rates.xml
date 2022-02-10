@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/choice_currency"
+        android:icon="@drawable/ic_choice_currency"
+        android:title="@string/choice_currency_toolbar"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/sorting"
+        android:icon="@drawable/ic_sort_rates"
+        android:title="@string/sorting_toolbar"
+        app:showAsAction="ifRoom"/>
+
+</menu>

@@ -3,7 +3,7 @@
     <style name="Theme.LoftCoinKotlin" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_six</item>
-        <item name="colorPrimaryVariant">@color/dark</item>
+        <item name="colorPrimaryVariant">@color/dark_seven</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/grey_blue</item>
@@ -14,17 +14,30 @@
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">?attr/colorPrimary</item>
         <item name="buttonWelcome">@style/Widget.Theme.Button.Welcome</item>
+
         <item name="textAppearanceHeadline1">@style/TextAppearance.AppCompat.H1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.AppCompat.H2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.AppCompat.H3</item>
         <item name="textAppearanceHeadline4">@style/TextAppearance.AppCompat.H4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.AppCompat.H5</item>
 
+        <item name="actionBarTheme">@style/Theme.AppBarOverlay</item>
+        <item name="actionBarPopupTheme">@style/Theme.PopupOverlay</item>
+
+        <item name="bottomNavigationStyle">@style/Theme.BottomNavigationView</item>
+
+        <item name="colorWalletCard">@color/dark_five</item>
+        <item name="walletCardWidth">240dp</item>
+        <item name="walletCardHeight">160dp</item>
     </style>
 
-    <attr name="buttonWelcome" format="reference"/>
-    <attr name="textAppearanceHeadline1" format="reference"/>
-    <attr name="textAppearanceHeadline2" format="reference"/>
-    <attr name="textAppearanceHeadline3" format="reference"/>
-    <attr name="textAppearanceHeadline4" format="reference"/>
-
+    <attr name="buttonWelcome" format="reference" />
+    <attr name="textAppearanceHeadline1" format="reference" />
+    <attr name="textAppearanceHeadline2" format="reference" />
+    <attr name="textAppearanceHeadline3" format="reference" />
+    <attr name="textAppearanceHeadline4" format="reference" />
+    <attr name="textAppearanceHeadline5" format="reference" />
+    <attr name="colorWalletCard" format="color|reference" />
+    <attr name="walletCardWidth" format="dimension|reference" />
+    <attr name="walletCardHeight" format="dimension|reference" />
 </resources>

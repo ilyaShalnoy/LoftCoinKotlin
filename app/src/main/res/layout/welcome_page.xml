@@ -13,32 +13,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/title"
-        android:layout_marginBottom="64dp" />
+        android:layout_marginBottom="64dp"
+        android:contentDescription="@string/image_welcome_activity" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/welcome_page_1_title"
-        android:textAppearance="?attr/textAppearanceHeadline2"
         android:layout_marginBottom="9dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textAppearance="?attr/textAppearanceHeadline2"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/subtitle"/>
+        tools:text="@string/welcome_page_1_title" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceHeadline4"
-        tools:text="@string/welcome_page_2_subtitle"
-        android:textColor="@color/white"
+        android:fontFamily="@font/roboto"
         android:gravity="center_horizontal"
         android:lines="3"
+        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textColor="@color/blue_grey"
+        android:layout_marginBottom="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        tools:text="@string/welcome_page_2_subtitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

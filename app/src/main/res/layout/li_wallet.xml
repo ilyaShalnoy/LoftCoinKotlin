@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="?attr/walletCardWidth"
+    android:layout_height="?attr/walletCardHeight"
+    android:background="@drawable/bg_card_wallet">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logo_crypto_card"
+            android:layout_width="@dimen/width_icon_crypto"
+            android:layout_height="@dimen/height_icon_crypto"
+            android:contentDescription="@string/description_img_icon_crypto_card"
+            tools:src="@drawable/ic_tools_crypto_icon" />
+
+        <TextView
+            android:id="@+id/title_crypto_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            tools:text="BTC" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/artboard_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/guideline">
+
+        <TextView
+            android:id="@+id/balance_text_crypto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline3"
+            tools:text="2.77444 BTC" />
+
+        <TextView
+            android:id="@+id/balance_text_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/grey_blue"
+            tools:text="2.77744 $" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
