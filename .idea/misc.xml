@@ -18,11 +18,15 @@
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/activity_splash.xml" value="0.36018518518518516" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/activity_welcome.xml" value="0.36018518518518516" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/fragment_converter.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/fragment_rates.xml" value="0.25" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/fragment_wallets.xml" value="0.3625" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/li_rate.xml" value="0.25" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/li_rates.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/li_wallet.xml" value="0.5" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/welcome_page.xml" value="0.25" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/menu/toolbar_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/menu/toolbar_menu_rates.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

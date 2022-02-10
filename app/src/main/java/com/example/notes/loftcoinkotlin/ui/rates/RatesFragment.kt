@@ -1,60 +1,59 @@
 package com.example.notes.loftcoinkotlin.ui.rates
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.notes.loftcoinkotlin.LoftApp
 import com.example.notes.loftcoinkotlin.R
+import com.example.notes.loftcoinkotlin.databinding.FragmentRatesBinding
+import com.example.notes.loftcoinkotlin.ui.BaseFragment
+import timber.log.Timber
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class RatesFragment : BaseFragment<FragmentRatesBinding>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RatesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class RatesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var adapter: RatesAdapter
+
+    private lateinit var viewModel: RatesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        adapter = RatesAdapter()
+        viewModel = ViewModelProvider(this, (requireActivity().application as LoftApp).ratesViewModelFactory)[RatesViewModel::class.java]
+    }
+
+    override fun initBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentRatesBinding {
+        return FragmentRatesBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        binding.recyclerRatesList.layoutManager = LinearLayoutManager(view.context)
+        binding.recyclerRatesList.swapAdapter(adapter, false)
+        binding.recyclerRatesList.setHasFixedSize(true)
+        viewModel.refresh()
+        viewModel.coinsLiveData.observe(viewLifecycleOwner) { coins ->
+            adapter.submitList(coins)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rates, container, false)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu_rates, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RatesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RatesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Timber.d(item.toString())
+        return super.onOptionsItemSelected(item)
     }
+
+
+    override fun onDestroyView() {
+        binding.recyclerRatesList.swapAdapter(null, false)
+        super.onDestroyView()
+    }
+
+
 }

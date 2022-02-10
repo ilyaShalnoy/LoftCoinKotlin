@@ -5,28 +5,20 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.loftcoinkotlin.R
 import com.example.notes.loftcoinkotlin.databinding.FragmentWalletsBinding
+import com.example.notes.loftcoinkotlin.ui.BaseFragment
 import kotlin.math.abs
 import kotlin.math.pow
 
 
-class WalletsFragment : Fragment() {
+class WalletsFragment : BaseFragment<FragmentWalletsBinding>() {
 
-    private var _binding: FragmentWalletsBinding? = null
-    private val binding
-        get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentWalletsBinding.inflate(layoutInflater, container, false)
-        return binding.root
+    override fun initBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentWalletsBinding {
+        return FragmentWalletsBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +40,11 @@ class WalletsFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        binding.recyclerForCards.adapter = null
+        super.onDestroyView()
+    }
+
     private fun calculationPadding(view: View) {
         val typedValue = TypedValue()
         view.context.theme.resolveAttribute(R.attr.walletCardWidth, typedValue, true)
@@ -55,11 +52,6 @@ class WalletsFragment : Fragment() {
         val padding: Int = ((displayMetrics.widthPixels - typedValue.getDimension(displayMetrics)) / 2).toInt()
         binding.recyclerForCards.setPadding(padding, 0, padding, 0)
         binding.recyclerForCards.clipToPadding = false
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
     private object CarouselScroller : RecyclerView.OnScrollListener() {
@@ -76,4 +68,6 @@ class WalletsFragment : Fragment() {
             }
         }
     }
+
+
 }

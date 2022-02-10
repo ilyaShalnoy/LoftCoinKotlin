@@ -42,5 +42,7 @@
     <string name="converter_fragment_label">Конвертер</string>
     <string name="rates_fragment_label">Общий анализ</string>
     <string name="description_img_icon_crypto_card">img icon crypto card</string>
+    <string name="choice_currency_toolbar">Выбор валюты</string>
+    <string name="sorting_toolbar">Сортировка</string>
 
 </resources>

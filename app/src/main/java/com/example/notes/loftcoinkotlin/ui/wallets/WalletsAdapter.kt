@@ -11,7 +11,7 @@ class WalletsAdapter : RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder>() 
     lateinit var inflater: LayoutInflater
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WalletsViewHolder {
-        return WalletsViewHolder(LiWalletBinding.inflate(inflater, parent, false).root)
+        return WalletsViewHolder(LiWalletBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: WalletsViewHolder, position: Int) {
@@ -28,7 +28,7 @@ class WalletsAdapter : RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder>() 
     }
 
 
-    inner class WalletsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class WalletsViewHolder(binding: LiWalletBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
 
