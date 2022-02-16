@@ -2,6 +2,7 @@ package com.example.notes.loftcoinkotlin
 
 import android.app.Application
 import android.os.StrictMode
+import com.example.notes.loftcoinkotlin.core.util.DebugTree
 import com.example.notes.loftcoinkotlin.data.net.API_KEY_HEADER
 import com.example.notes.loftcoinkotlin.data.net.CloudCoinsRepository
 import com.example.notes.loftcoinkotlin.data.net.CoinsApi
@@ -30,7 +31,7 @@ class LoftApp : Application() {
 
         if (BuildConfig.DEBUG) {
             StrictMode.enableDefaults()
-            Timber.plant(Timber.DebugTree());
+            Timber.plant(DebugTree());
             with(loggingInterceptor) {
                 level = HttpLoggingInterceptor.Level.HEADERS
                 redactHeader(API_KEY_HEADER)

@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notes.loftcoinkotlin.LoftApp
 import com.example.notes.loftcoinkotlin.R
+import com.example.notes.loftcoinkotlin.core.util.ChangeFormatter
+import com.example.notes.loftcoinkotlin.core.util.PriceFormatter
 import com.example.notes.loftcoinkotlin.databinding.FragmentRatesBinding
 import com.example.notes.loftcoinkotlin.ui.BaseFragment
 import timber.log.Timber
@@ -19,7 +22,7 @@ class RatesFragment : BaseFragment<FragmentRatesBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = RatesAdapter()
+        adapter = RatesAdapter(PriceFormatter(), ChangeFormatter())
         viewModel = ViewModelProvider(this, (requireActivity().application as LoftApp).ratesViewModelFactory)[RatesViewModel::class.java]
     }
 
@@ -34,8 +37,14 @@ class RatesFragment : BaseFragment<FragmentRatesBinding>() {
         binding.recyclerRatesList.swapAdapter(adapter, false)
         binding.recyclerRatesList.setHasFixedSize(true)
         viewModel.refresh()
-        viewModel.coinsLiveData.observe(viewLifecycleOwner) { coins ->
-            adapter.submitList(coins)
+        viewModel.coinsLiveData.observe(viewLifecycleOwner, adapter::submitList)
+
+        viewModel.isRefreshing.observe(
+            viewLifecycleOwner, binding.swipeRefresh::setRefreshing
+        )
+
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refresh()
         }
     }
 
@@ -45,8 +54,13 @@ class RatesFragment : BaseFragment<FragmentRatesBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Timber.d(item.toString())
-        return super.onOptionsItemSelected(item)
+        if (R.id.currency_dialog == item.itemId) {
+            NavHostFragment
+                .findNavController(this)
+                .navigate(R.id.currency_dialog)
+            return true
+        }
+            return super.onOptionsItemSelected(item)
     }
 
 

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/choice_currency"
+    <item android:id="@+id/currency_dialog"
         android:icon="@drawable/ic_choice_currency"
         android:title="@string/choice_currency_toolbar"
         app:showAsAction="ifRoom"/>

@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/icon_crypto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/width_icon_crypto"
+        android:layout_height="@dimen/height_icon_crypto"
         android:layout_gravity="center"
         tools:src="@drawable/ic_tools_crypto_icon" />
 
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline4"
-            android:textColor="@color/weird_green"
+            tools:textColor="@color/weird_green"
             tools:text="+9.34%"
             android:layout_gravity="end"/>
     </LinearLayout>

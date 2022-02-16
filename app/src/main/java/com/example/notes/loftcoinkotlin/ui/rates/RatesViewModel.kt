@@ -13,14 +13,19 @@ class RatesViewModel(private val repository: CoinsRepository) : ViewModel() {
     private val _coinsLiveData = MutableLiveData<List<Coin>>()
     val coinsLiveData get() = _coinsLiveData
 
+    private val _isRefreshing = MutableLiveData<Boolean>()
+    val isRefreshing get() = _isRefreshing
+
     private lateinit var future: Future<*>
 
     private val executor = Executors.newSingleThreadExecutor()
 
     fun refresh() {
+        _isRefreshing.postValue(true)
         future = executor.submit {
             try {
                 _coinsLiveData.postValue(repository.fetchListings("USD"))
+                isRefreshing.postValue(false)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
