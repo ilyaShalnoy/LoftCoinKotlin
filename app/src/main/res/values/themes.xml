@@ -29,6 +29,11 @@
         <item name="colorWalletCard">@color/dark_five</item>
         <item name="walletCardWidth">240dp</item>
         <item name="walletCardHeight">160dp</item>
+
+        <item name="percentPositive">@color/weird_green</item>
+        <item name="percentNegative">@color/watermelon</item>
+
+        <item name="materialAlertDialogTheme">@style/Theme.AlertDialog</item>
     </style>
 
     <attr name="buttonWelcome" format="reference" />
@@ -40,4 +45,6 @@
     <attr name="colorWalletCard" format="color|reference" />
     <attr name="walletCardWidth" format="dimension|reference" />
     <attr name="walletCardHeight" format="dimension|reference" />
+    <attr name="percentPositive" format="color|reference"/>
+    <attr name="percentNegative" format="color|reference"/>
 </resources>

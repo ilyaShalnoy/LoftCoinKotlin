@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.loftcoinkotlin.R
 import com.example.notes.loftcoinkotlin.databinding.FragmentWalletsBinding
 import com.example.notes.loftcoinkotlin.ui.BaseFragment
+import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.math.pow
 
 
-class WalletsFragment : BaseFragment<FragmentWalletsBinding>() {
+class WalletsFragment @Inject constructor(): BaseFragment<FragmentWalletsBinding>() {
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentWalletsBinding {
         return FragmentWalletsBinding.inflate(inflater, container, false)

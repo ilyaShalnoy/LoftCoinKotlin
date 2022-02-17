@@ -5,9 +5,11 @@
       <map>
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/bg_card_wallet.xml" value="0.16" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/bg_crypto_icon.xml" value="0.3165" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/bg_dialog_symbol.xml" value="0.322" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/bottom_nav_colored_item.xml" value="0.1" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/btn_welcome_default.xml" value="0.286" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/ic_add_card_wallets.xml" value="0.3265" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/ic_choice_currency.xml" value="0.1805" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/ic_converter.xml" value="0.3675" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/ic_rate.xml" value="0.3675" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/drawable/ic_wallet.xml" value="0.3165" />
@@ -17,9 +19,11 @@
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/activity_splash.xml" value="0.36018518518518516" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/activity_welcome.xml" value="0.36018518518518516" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/dialog_currency.xml" value="0.2790328973444312" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/fragment_converter.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/fragment_rates.xml" value="0.25" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/fragment_wallets.xml" value="0.3625" />
+        <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/li_currency.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/li_rate.xml" value="0.25" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/li_rates.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Shalnoy/AndroidStudioProjects/LoftCoinKotlin/app/src/main/res/layout/li_wallet.xml" value="0.5" />

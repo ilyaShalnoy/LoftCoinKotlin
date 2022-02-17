@@ -46,4 +46,8 @@
         <item name="itemTextColor">@color/bottom_nav_colored_item</item>
     </style>
 
+    <style name="Theme.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">@color/dark_four</item>
+    </style>
+
 </resources>

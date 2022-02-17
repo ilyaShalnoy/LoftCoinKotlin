@@ -5,7 +5,7 @@ import com.example.notes.loftcoinkotlin.data.net.Coin
 
 class RatesDiffCallback: DiffUtil.ItemCallback<Coin>() {
 
-    override fun areItemsTheSame(oldItem: Coin, newItem: Coin) = oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: Coin, newItem: Coin) = oldItem.getId() == newItem.getId()
 
     override fun areContentsTheSame(oldItem: Coin, newItem: Coin) = oldItem == newItem
 }
