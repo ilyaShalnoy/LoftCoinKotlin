@@ -8,7 +8,7 @@ import com.example.notes.loftcoinkotlin.databinding.LiWalletBinding
 
 class WalletsAdapter : RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder>() {
 
-    lateinit var inflater: LayoutInflater
+    private lateinit var inflater: LayoutInflater
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WalletsViewHolder {
         return WalletsViewHolder(LiWalletBinding.inflate(inflater, parent, false))

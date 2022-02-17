@@ -13,9 +13,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CurrencyDialogFragment : DialogFragment() {
 
-//    private var _binding: DialogCurrencyBinding? = null
-//    private val binding get() = _binding!!
-
     private lateinit var binding: DialogCurrencyBinding
 
     private lateinit var currencyRepository: CurrencyRepository
@@ -40,7 +37,6 @@ class CurrencyDialogFragment : DialogFragment() {
             .setView(binding.root)
             .create()
     }
-
 
     override fun onDestroyView() {
         binding.recyclerDialog.adapter = null

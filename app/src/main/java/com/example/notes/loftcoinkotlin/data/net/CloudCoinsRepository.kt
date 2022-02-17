@@ -2,8 +2,11 @@ package com.example.notes.loftcoinkotlin.data.net
 
 import com.example.notes.loftcoinkotlin.data.CoinsRepository
 import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CloudCoinsRepository(private val coinsApi: CoinsApi) : CoinsRepository {
+@Singleton
+class CloudCoinsRepository @Inject constructor(private val coinsApi: CoinsApi) : CoinsRepository {
 
     override fun fetchListings(currency: String): List<Coin> {
         val response = coinsApi.fetchListings(currency).execute()

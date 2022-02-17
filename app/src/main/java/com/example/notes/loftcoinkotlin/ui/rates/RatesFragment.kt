@@ -1,29 +1,32 @@
 package com.example.notes.loftcoinkotlin.ui.rates
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.notes.loftcoinkotlin.LoftApp
+import com.example.notes.loftcoinkotlin.BaseComponent
 import com.example.notes.loftcoinkotlin.R
 import com.example.notes.loftcoinkotlin.core.util.ChangeFormatter
 import com.example.notes.loftcoinkotlin.core.util.PriceFormatter
 import com.example.notes.loftcoinkotlin.databinding.FragmentRatesBinding
 import com.example.notes.loftcoinkotlin.ui.BaseFragment
-import timber.log.Timber
+import javax.inject.Inject
 
-class RatesFragment : BaseFragment<FragmentRatesBinding>() {
+class RatesFragment @Inject constructor(baseComponent: BaseComponent): BaseFragment<FragmentRatesBinding>() {
 
     private lateinit var adapter: RatesAdapter
 
     private lateinit var viewModel: RatesViewModel
 
+    private val component = DaggerRatesComponent.builder()
+        .baseComponent(baseComponent)
+        .build()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = RatesAdapter(PriceFormatter(), ChangeFormatter())
-        viewModel = ViewModelProvider(this, (requireActivity().application as LoftApp).ratesViewModelFactory)[RatesViewModel::class.java]
+        viewModel = ViewModelProvider(this, component.viewModelFactory())[RatesViewModel::class.java]
     }
 
     override fun initBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentRatesBinding {

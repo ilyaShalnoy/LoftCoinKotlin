@@ -7,8 +7,9 @@ import com.example.notes.loftcoinkotlin.data.net.Coin
 import java.lang.Exception
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
+import javax.inject.Inject
 
-class RatesViewModel(private val repository: CoinsRepository) : ViewModel() {
+class RatesViewModel @Inject constructor(private val repository: CoinsRepository) : ViewModel() {
 
     private val _coinsLiveData = MutableLiveData<List<Coin>>()
     val coinsLiveData get() = _coinsLiveData
