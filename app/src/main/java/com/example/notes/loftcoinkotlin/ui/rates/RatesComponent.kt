@@ -1,8 +1,8 @@
 package com.example.notes.loftcoinkotlin.ui.rates
 
 import androidx.lifecycle.ViewModelProvider
-import com.example.notes.loftcoinkotlin.BaseComponent
-import com.example.notes.loftcoinkotlin.core.util.ViewModelModule
+import com.example.notes.loftcoinkotlin.core.BaseComponent
+import com.example.notes.loftcoinkotlin.ui.ViewModelModule
 import dagger.Component
 import javax.inject.Singleton
 

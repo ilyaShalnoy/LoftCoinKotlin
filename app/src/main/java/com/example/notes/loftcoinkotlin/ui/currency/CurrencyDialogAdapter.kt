@@ -1,11 +1,10 @@
 package com.example.notes.loftcoinkotlin.ui.currency
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notes.loftcoinkotlin.data.Currency
+import com.example.notes.loftcoinkotlin.data.currency.Currency
 import com.example.notes.loftcoinkotlin.databinding.LiCurrencyBinding
 
 class CurrencyDialogAdapter: ListAdapter<Currency, CurrencyDialogAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {

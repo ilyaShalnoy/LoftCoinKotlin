@@ -1,10 +1,11 @@
-package com.example.notes.loftcoinkotlin.data
+package com.example.notes.loftcoinkotlin.data.currency
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.notes.loftcoinkotlin.R
+import com.example.notes.loftcoinkotlin.core.data.currency.CurrencyRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
