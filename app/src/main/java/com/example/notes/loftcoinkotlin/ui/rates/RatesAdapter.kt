@@ -1,12 +1,9 @@
 package com.example.notes.loftcoinkotlin.ui.rates
 
 import android.graphics.Color
-import android.graphics.Outline
 import android.util.TypedValue
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.loftcoinkotlin.BuildConfig
@@ -17,7 +14,6 @@ import com.example.notes.loftcoinkotlin.data.net.Coin
 import com.example.notes.loftcoinkotlin.databinding.LiRateBinding
 import com.example.notes.loftcoinkotlin.ui.rates.RatesAdapter.RatesViewHolder
 import com.squareup.picasso.Picasso
-import kotlin.math.min
 
 class RatesAdapter(
     private val priceFormatter: Formatter<Double>,

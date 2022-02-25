@@ -5,7 +5,7 @@ import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.notes.loftcoinkotlin.BaseComponent
+import com.example.notes.loftcoinkotlin.core.BaseComponent
 import com.example.notes.loftcoinkotlin.R
 import com.example.notes.loftcoinkotlin.core.util.ChangeFormatter
 import com.example.notes.loftcoinkotlin.core.util.PriceFormatter

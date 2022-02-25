@@ -1,4 +1,4 @@
-package com.example.notes.loftcoinkotlin.data
+package com.example.notes.loftcoinkotlin.data.currency
 
 data class Currency(
     private val symbol: String,

@@ -1,4 +1,4 @@
-package com.example.notes.loftcoinkotlin.core.util
+package com.example.notes.loftcoinkotlin.ui
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.notes.loftcoinkotlin.ui.ViewModelFactory

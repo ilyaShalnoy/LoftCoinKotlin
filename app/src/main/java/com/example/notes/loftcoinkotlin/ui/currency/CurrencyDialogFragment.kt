@@ -6,8 +6,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.loftcoinkotlin.R
-import com.example.notes.loftcoinkotlin.data.CurrencyRepository
-import com.example.notes.loftcoinkotlin.data.CurrencyRepositoryImpl
+import com.example.notes.loftcoinkotlin.core.data.currency.CurrencyRepository
+import com.example.notes.loftcoinkotlin.data.currency.CurrencyRepositoryImpl
+
 import com.example.notes.loftcoinkotlin.databinding.DialogCurrencyBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

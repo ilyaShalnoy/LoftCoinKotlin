@@ -2,7 +2,7 @@ package com.example.notes.loftcoinkotlin.ui.rates
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.notes.loftcoinkotlin.data.CoinsRepository
+import com.example.notes.loftcoinkotlin.core.data.CoinsRepository
 import com.example.notes.loftcoinkotlin.data.net.Coin
 import java.lang.Exception
 import java.util.concurrent.Executors
