@@ -16,6 +16,9 @@ object AppModule {
     @Provides
     fun context(app: Application): Context = app.applicationContext
 
+    @JvmStatic
+    @Provides
+    @Singleton
     fun ioExecutor(): ExecutorService {
         val poolSize = Runtime.getRuntime().availableProcessors() * 2 + 1
         return Executors.newFixedThreadPool(poolSize)

@@ -1,12 +1,13 @@
 package com.example.notes.loftcoinkotlin.core.data
 
 import androidx.lifecycle.LiveData
-import com.example.notes.loftcoinkotlin.data.net.Coin
+import com.example.notes.loftcoinkotlin.data.CoinsDataModel
+import com.example.notes.loftcoinkotlin.data.net.NetworkCoin
 
 interface CoinsRepository {
-    fun fetchListings(currency: String): List<Coin>
+    fun fetchListings(currency: String): List<CoinsDataModel>
 
-    fun fetchListingsDatabase(query: Query): LiveData<List<Coin>>
+    fun fetchListingsDatabase(query: Query): LiveData<List<CoinsDataModel>>
 }
 
 data class Query(

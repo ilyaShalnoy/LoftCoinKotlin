@@ -38,7 +38,7 @@ class CurrencyRepositoryImpl @Inject constructor(context: Context) : CurrencyRep
     }
 
     override fun updateCurrency(currency: Currency) {
-
+        sharedPreferences?.edit()?.putString(KEY_CURRENCY, currency.getCode())?.apply()
     }
 
     inner class CurrenciesLiveData() : LiveData<Currency>(),

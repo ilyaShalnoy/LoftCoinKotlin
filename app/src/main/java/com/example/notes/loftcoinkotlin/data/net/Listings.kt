@@ -5,10 +5,9 @@ import com.squareup.moshi.Json
 
 data class Listings(
     @Json(name = "data")
-    private val data: List<Coin>
-) : Mapper<List<Coin>> {
-
-    override fun to(): List<Coin> {
+    private val data: List<NetworkCoin>
+) {
+    fun getData(): List<NetworkCoin> {
         return data
     }
 }

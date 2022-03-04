@@ -39,7 +39,6 @@ class RatesFragment @Inject constructor(baseComponent: BaseComponent): BaseFragm
         binding.recyclerRatesList.layoutManager = LinearLayoutManager(view.context)
         binding.recyclerRatesList.swapAdapter(adapter, false)
         binding.recyclerRatesList.setHasFixedSize(true)
-        viewModel.refresh()
         viewModel.coinsLiveData.observe(viewLifecycleOwner, adapter::submitList)
 
         viewModel.isRefreshing.observe(

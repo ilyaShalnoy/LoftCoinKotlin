@@ -5,11 +5,13 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import okhttp3.Dispatcher
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.ExecutorService
 import javax.inject.Singleton
 
 @Module
@@ -17,8 +19,10 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(executor: ExecutorService): OkHttpClient {
+
         val buildHttpClient = OkHttpClient.Builder()
+            .dispatcher(Dispatcher(executor))
             .addInterceptor(Interceptor { chain ->
                 val original = chain.request()
                 val request = original.newBuilder()
