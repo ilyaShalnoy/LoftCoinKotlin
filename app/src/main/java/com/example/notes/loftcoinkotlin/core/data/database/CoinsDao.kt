@@ -13,6 +13,12 @@ interface CoinsDao {
     @Query("SELECT * FROM CacheCoin")
     fun fetchAll(): LiveData<List<CacheCoin>>
 
+    @Query("SELECT * FROM CacheCoin ORDER BY rank ASC")
+    fun fetchAllSortByRank(): LiveData<List<CacheCoin>>
+
+    @Query("SELECT * FROM CacheCoin ORDER BY price DESC")
+    fun fetchAllSortByPrice(): LiveData<List<CacheCoin>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(coins: List<CacheCoin>)
 

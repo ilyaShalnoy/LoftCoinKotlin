@@ -5,12 +5,12 @@ import com.example.notes.loftcoinkotlin.data.CoinsDataModel
 import com.example.notes.loftcoinkotlin.data.net.NetworkCoin
 
 interface CoinsRepository {
-    fun fetchListings(currency: String): List<CoinsDataModel>
 
     fun fetchListingsDatabase(query: Query): LiveData<List<CoinsDataModel>>
 }
 
 data class Query(
     val currency: String,
-    val forceUpdate: Boolean = true
+    val forceUpdate: Boolean = true,
+    val sortBy: SortBy
 )

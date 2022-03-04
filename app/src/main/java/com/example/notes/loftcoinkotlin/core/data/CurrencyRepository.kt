@@ -1,4 +1,4 @@
-package com.example.notes.loftcoinkotlin.core.data.currency
+package com.example.notes.loftcoinkotlin.core.data
 
 import androidx.lifecycle.LiveData
 import com.example.notes.loftcoinkotlin.data.currency.Currency

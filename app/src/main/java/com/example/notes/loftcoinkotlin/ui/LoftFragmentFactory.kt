@@ -1,4 +1,4 @@
-package com.example.notes.loftcoinkotlin.core
+package com.example.notes.loftcoinkotlin.ui
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory

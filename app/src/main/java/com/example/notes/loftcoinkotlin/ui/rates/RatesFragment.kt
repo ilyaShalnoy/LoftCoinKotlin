@@ -13,7 +13,7 @@ import com.example.notes.loftcoinkotlin.databinding.FragmentRatesBinding
 import com.example.notes.loftcoinkotlin.ui.BaseFragment
 import javax.inject.Inject
 
-class RatesFragment @Inject constructor(baseComponent: BaseComponent): BaseFragment<FragmentRatesBinding>() {
+class RatesFragment @Inject constructor(baseComponent: BaseComponent) : BaseFragment<FragmentRatesBinding>() {
 
     private lateinit var adapter: RatesAdapter
 
@@ -61,8 +61,10 @@ class RatesFragment @Inject constructor(baseComponent: BaseComponent): BaseFragm
                 .findNavController(this)
                 .navigate(R.id.currency_dialog)
             return true
+        } else if (R.id.sorting == item.itemId) {
+            viewModel.switchSortingOrder()
         }
-            return super.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
     }
 
 

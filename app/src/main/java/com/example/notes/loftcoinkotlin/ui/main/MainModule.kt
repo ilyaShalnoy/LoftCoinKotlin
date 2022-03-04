@@ -2,7 +2,7 @@ package com.example.notes.loftcoinkotlin.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.example.notes.loftcoinkotlin.core.LoftFragmentFactory
+import com.example.notes.loftcoinkotlin.ui.LoftFragmentFactory
 import com.example.notes.loftcoinkotlin.ui.converter.ConverterFragment
 import com.example.notes.loftcoinkotlin.ui.currency.CurrencyDialogFragment
 import com.example.notes.loftcoinkotlin.ui.rates.RatesFragment
