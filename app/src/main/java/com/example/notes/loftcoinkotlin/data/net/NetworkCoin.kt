@@ -14,7 +14,7 @@ data class NetworkCoin(
     @Json(name = "cmc_rank")
     private val rank: Int,
     @Json(name = "quote")
-    private val quote: Map<String, Quote>
+    private val quote: Map<String, Quote>,
 ) : Mapper<CoinsDataModel> {
 
     private fun price(): Double {
@@ -33,8 +33,9 @@ data class NetworkCoin(
             0.toDouble()
     }
 
+
     override fun to(): CoinsDataModel {
-        return CoinsDataModel(id, name, symbol, rank, price(), change24h())
+        return CoinsDataModel(id, name, symbol, rank, price(), change24h(), "USD")
     }
 }
 

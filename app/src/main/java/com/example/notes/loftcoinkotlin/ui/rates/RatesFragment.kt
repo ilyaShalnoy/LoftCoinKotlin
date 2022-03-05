@@ -25,7 +25,7 @@ class RatesFragment @Inject constructor(baseComponent: BaseComponent) : BaseFrag
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = RatesAdapter(PriceFormatter(), ChangeFormatter())
+        adapter = component.ratesAdapter()
         viewModel = ViewModelProvider(this, component.viewModelFactory())[RatesViewModel::class.java]
     }
 

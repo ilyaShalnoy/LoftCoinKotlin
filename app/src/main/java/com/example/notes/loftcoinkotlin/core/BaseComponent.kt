@@ -3,6 +3,7 @@ package com.example.notes.loftcoinkotlin.core
 import android.content.Context
 import com.example.notes.loftcoinkotlin.core.data.CoinsRepository
 import com.example.notes.loftcoinkotlin.core.data.CurrencyRepository
+import com.example.notes.loftcoinkotlin.core.util.ImageLoader
 
 interface BaseComponent {
     fun context(): Context
@@ -10,4 +11,6 @@ interface BaseComponent {
     fun coinsRepository(): CoinsRepository
 
     fun currencyRepository(): CurrencyRepository
+
+    fun imageLoader(): ImageLoader
 }

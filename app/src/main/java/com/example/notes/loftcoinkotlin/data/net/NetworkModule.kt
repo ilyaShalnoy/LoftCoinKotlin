@@ -17,31 +17,6 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    @Singleton
-    @Provides
-    fun provideHttpClient(executor: ExecutorService): OkHttpClient {
-
-        val buildHttpClient = OkHttpClient.Builder()
-            .dispatcher(Dispatcher(executor))
-            .addInterceptor(Interceptor { chain ->
-                val original = chain.request()
-                val request = original.newBuilder()
-                    .header(API_KEY_HEADER, BuildConfig.API_KEY)
-                    .build()
-                chain.proceed(request)
-            })
-
-        if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            with(loggingInterceptor) {
-                level = HttpLoggingInterceptor.Level.HEADERS
-                redactHeader(API_KEY_HEADER)
-            }
-            buildHttpClient.addInterceptor(loggingInterceptor)
-        }
-        return buildHttpClient.build()
-    }
-
     @Provides
     fun provideMoshi(): Moshi =
         Moshi.Builder()
@@ -52,7 +27,17 @@ class NetworkModule {
     fun provideRetrofit(httpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_ENDPOINT)
-            .client(httpClient)
+            .client(
+                httpClient.newBuilder()
+                    .addInterceptor(Interceptor { chain ->
+                        val original = chain.request()
+                        val request = original.newBuilder()
+                            .header(API_KEY_HEADER, BuildConfig.API_KEY)
+                            .build()
+                        chain.proceed(request)
+                    })
+                    .build()
+            )
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }

@@ -56,7 +56,7 @@ class CoinsRepositoryImpl
                             val coins = listings.getData().map {
                                 it.to()
                             }
-                            saveCoinsIntoDB(coins)
+                            saveCoinsIntoDB(coins, query)
                         }
                     } else {
                         throw IOException(response.errorBody()?.string())
@@ -68,7 +68,7 @@ class CoinsRepositoryImpl
         }
 
 
-    private fun saveCoinsIntoDB(coins: List<CoinsDataModel>) {
+    private fun saveCoinsIntoDB(coins: List<CoinsDataModel>, query: Query) {
         val cacheCoin = ArrayList<CacheCoin>()
 
         for (coin in coins) {
@@ -79,11 +79,11 @@ class CoinsRepositoryImpl
                     coin.getSymbol(),
                     coin.getRank(),
                     coin.getPrice(),
-                    coin.getChange()
+                    coin.getChange(),
+                    query.currency
                 )
             )
         }
-        Log.d("saveCoinsIntoDB", cacheCoin.toString())
         database.getDao().insertAll(cacheCoin)
     }
 

@@ -6,7 +6,8 @@ data class CoinsDataModel(
     private val symbol: String,
     private val rank: Int,
     private val price: Double,
-    private val change24: Double
+    private val change24: Double,
+    private val currencyCode: String
 ) {
     fun getId() = id
     fun getName() = name
@@ -14,4 +15,5 @@ data class CoinsDataModel(
     fun getRank() = rank
     fun getPrice() = price
     fun getChange() = change24
+    fun getCurrencyCode() = currencyCode
 }
