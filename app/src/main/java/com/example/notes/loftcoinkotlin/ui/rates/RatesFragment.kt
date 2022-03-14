@@ -7,10 +7,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notes.loftcoinkotlin.core.BaseComponent
 import com.example.notes.loftcoinkotlin.R
-import com.example.notes.loftcoinkotlin.core.util.ChangeFormatter
-import com.example.notes.loftcoinkotlin.core.util.PriceFormatter
 import com.example.notes.loftcoinkotlin.databinding.FragmentRatesBinding
 import com.example.notes.loftcoinkotlin.ui.BaseFragment
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class RatesFragment @Inject constructor(baseComponent: BaseComponent) : BaseFragment<FragmentRatesBinding>() {
@@ -18,6 +17,8 @@ class RatesFragment @Inject constructor(baseComponent: BaseComponent) : BaseFrag
     private lateinit var adapter: RatesAdapter
 
     private lateinit var viewModel: RatesViewModel
+
+    private val compositeDisposable = CompositeDisposable()
 
     private val component = DaggerRatesComponent.builder()
         .baseComponent(baseComponent)
@@ -39,11 +40,8 @@ class RatesFragment @Inject constructor(baseComponent: BaseComponent) : BaseFrag
         binding.recyclerRatesList.layoutManager = LinearLayoutManager(view.context)
         binding.recyclerRatesList.swapAdapter(adapter, false)
         binding.recyclerRatesList.setHasFixedSize(true)
-        viewModel.coinsLiveData.observe(viewLifecycleOwner, adapter::submitList)
-
-        viewModel.isRefreshing.observe(
-            viewLifecycleOwner, binding.swipeRefresh::setRefreshing
-        )
+        compositeDisposable.add(viewModel.coins().subscribe(adapter::submitList))
+        compositeDisposable.add(viewModel.isRefreshing.subscribe(binding.swipeRefresh::setRefreshing))
 
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refresh()
@@ -70,6 +68,7 @@ class RatesFragment @Inject constructor(baseComponent: BaseComponent) : BaseFrag
 
     override fun onDestroyView() {
         binding.recyclerRatesList.swapAdapter(null, false)
+        compositeDisposable.clear()
         super.onDestroyView()
     }
 

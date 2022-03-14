@@ -6,18 +6,19 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.notes.loftcoinkotlin.data.database.CacheCoin
+import io.reactivex.rxjava3.core.Observable
 
 @Dao
 interface CoinsDao {
 
     @Query("SELECT * FROM CacheCoin")
-    fun fetchAll(): LiveData<List<CacheCoin>>
+    fun fetchAll(): Observable<List<CacheCoin>>
 
     @Query("SELECT * FROM CacheCoin ORDER BY rank ASC")
-    fun fetchAllSortByRank(): LiveData<List<CacheCoin>>
+    fun fetchAllSortByRank(): Observable<List<CacheCoin>>
 
     @Query("SELECT * FROM CacheCoin ORDER BY price DESC")
-    fun fetchAllSortByPrice(): LiveData<List<CacheCoin>>
+    fun fetchAllSortByPrice(): Observable<List<CacheCoin>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(coins: List<CacheCoin>)

@@ -61,6 +61,7 @@ dependencies {
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -70,9 +71,12 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.20'
 
     //RxJava3
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
     //Room
     implementation("androidx.room:room-runtime:2.4.1")
+    implementation("androidx.room:room-rxjava3:2.4.1")
     kapt("androidx.room:room-compiler:2.4.1")
 
     //Tests

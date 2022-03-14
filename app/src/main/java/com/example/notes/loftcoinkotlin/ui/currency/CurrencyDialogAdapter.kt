@@ -24,15 +24,10 @@ class CurrencyDialogAdapter(private val onItemDialogClickListener: OnItemDialogC
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         holder.bind(position)
-
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         inflater = LayoutInflater.from(recyclerView.context)
-    }
-
-    override fun getItem(position: Int): Currency {
-        return super.getItem(position)
     }
 
     inner class CurrencyViewHolder(

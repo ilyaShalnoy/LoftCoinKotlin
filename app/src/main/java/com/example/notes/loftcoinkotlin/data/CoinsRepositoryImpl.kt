@@ -1,76 +1,59 @@
 package com.example.notes.loftcoinkotlin.data
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.notes.loftcoinkotlin.core.data.CoinsRepository
 import com.example.notes.loftcoinkotlin.core.data.Query
 import com.example.notes.loftcoinkotlin.core.data.SortBy
+import com.example.notes.loftcoinkotlin.core.util.RxSchedulers
 import com.example.notes.loftcoinkotlin.data.database.CacheCoin
 import com.example.notes.loftcoinkotlin.data.database.LoftDatabase
 import com.example.notes.loftcoinkotlin.data.net.CoinsApi
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
-import java.io.IOException
-import java.util.concurrent.ExecutorService
+import java.util.concurrent.Callable
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.collections.ArrayList
 
 @Singleton
 class CoinsRepositoryImpl
 @Inject constructor(
     private val coinsApi: CoinsApi,
     private val database: LoftDatabase,
-    private val executor: ExecutorService
+    private val schedulers: RxSchedulers
 ) : CoinsRepository {
 
 
-    override fun fetchListingsDatabase(query: Query): LiveData<List<CoinsDataModel>> {
-
-        fetchFromNetworkIfNecessary(query)
-        return fetchFromDb(query)
+    override fun fetchListingsDatabase(query: Query): Observable<List<CoinsDataModel>> {
+        Log.d("forceUpdate", query.forceUpdate.toString())
+        return Observable.fromCallable {
+            query.forceUpdate!! || database.getDao().coinsCount() == 0
+        }.switchMap {
+            if (it) coinsApi.fetchListings(query.currency!!) else Observable.empty()
+        }.map { listing ->
+            val coinsDataModel = listing.getData().map { it.to() }
+            mapToCacheCoin(query, coinsDataModel)
+        }.doOnNext { coins ->
+            database.getDao().insertAll(coins)
+        }.switchMap {
+            fetchFromDb(query)
+        }.switchIfEmpty {
+            fetchFromDb(query)
+        }.map {
+            it.map { cacheCoin -> cacheCoin.to() }
+        }.subscribeOn(schedulers.io())
     }
 
-    private fun fetchFromDb(query: Query): LiveData<List<CoinsDataModel>> {
-        val coins = if (query.sortBy == SortBy.RANK) {
+    private fun fetchFromDb(query: Query): Observable<List<CacheCoin>> {
+        return if (query.sortBy == SortBy.RANK) {
             database.getDao().fetchAllSortByRank()
         } else {
             database.getDao().fetchAllSortByPrice()
         }
-        return Transformations.map(coins) {
-            it.map { cacheCoin ->
-                cacheCoin.to()
-            }
-        }
     }
 
-    private fun fetchFromNetworkIfNecessary(query: Query) =
-        executor.submit {
-            if (query.forceUpdate || database.getDao().coinsCount() == 0) {
-                try {
-                    val response = coinsApi.fetchListings(query.currency).execute()
-                    if (response.isSuccessful) {
-                        val listings = response.body()
-                        if (listings != null) {
-                            val coins = listings.getData().map {
-                                it.to()
-                            }
-                            saveCoinsIntoDB(coins, query)
-                        }
-                    } else {
-                        throw IOException(response.errorBody()?.string())
-                    }
-                } catch (e: IOException) {
-                    Timber.e(e)
-                }
-            }
-        }
-
-
-    private fun saveCoinsIntoDB(coins: List<CoinsDataModel>, query: Query) {
+    private fun mapToCacheCoin(query: Query, coins: List<CoinsDataModel>): List<CacheCoin> {
         val cacheCoin = ArrayList<CacheCoin>()
-
         for (coin in coins) {
             cacheCoin.add(
                 CacheCoin(
@@ -80,11 +63,10 @@ class CoinsRepositoryImpl
                     coin.getRank(),
                     coin.getPrice(),
                     coin.getChange(),
-                    query.currency
+                    query.currency!!
                 )
             )
         }
-        database.getDao().insertAll(cacheCoin)
+        return cacheCoin
     }
-
 }

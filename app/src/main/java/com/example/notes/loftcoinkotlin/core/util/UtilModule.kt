@@ -9,4 +9,6 @@ abstract class UtilModule {
     @Binds
     abstract fun imageLoader(impl: PicassoImageLoader): ImageLoader
 
+    @Binds
+    abstract fun schedulers(impl: RxSchedulersImpl): RxSchedulers
 }

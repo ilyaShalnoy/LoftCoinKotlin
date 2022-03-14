@@ -2,6 +2,7 @@ package com.example.notes.loftcoinkotlin.ui.currency
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
@@ -34,9 +35,11 @@ class CurrencyDialogFragment @Inject constructor(baseComponent: BaseComponent) :
         adapter = CurrencyDialogAdapter(object : CurrencyDialogAdapter.OnItemDialogClickListener {
             override fun onItemClick(currency: Currency) {
                 viewModel.updateCurrencies(currency)
+                Thread.sleep(300)
+                dismissAllowingStateLoss()
             }
-
         })
+
         viewModel.allCurrencies().observe(this) {
             adapter.submitList(it)
         }
@@ -50,6 +53,7 @@ class CurrencyDialogFragment @Inject constructor(baseComponent: BaseComponent) :
             .setTitle(R.string.choose_currency)
             .setView(binding.root)
             .create()
+
     }
 
     override fun onDestroyView() {
