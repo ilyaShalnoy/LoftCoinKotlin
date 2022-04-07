@@ -2,9 +2,11 @@ package com.example.notes.loftcoinkotlin.data
 
 import com.example.notes.loftcoinkotlin.core.data.CoinsRepository
 import com.example.notes.loftcoinkotlin.core.data.CurrencyRepository
+import com.example.notes.loftcoinkotlin.core.data.WalletsRepository
 import com.example.notes.loftcoinkotlin.data.currency.CurrencyRepositoryImpl
 import com.example.notes.loftcoinkotlin.data.database.DatabaseModule
 import com.example.notes.loftcoinkotlin.data.net.NetworkModule
+import com.example.notes.loftcoinkotlin.data.wallets.WalletsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 
@@ -17,4 +19,6 @@ abstract class DataModule {
     @Binds
     abstract fun bindCurrencyRepo(currencyRepo: CurrencyRepositoryImpl): CurrencyRepository
 
+    @Binds
+    abstract fun bindWalletsRepo(walletsRepo: WalletsRepositoryImpl): WalletsRepository
 }

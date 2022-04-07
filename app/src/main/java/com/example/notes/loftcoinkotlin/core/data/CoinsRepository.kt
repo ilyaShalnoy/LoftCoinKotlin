@@ -2,12 +2,16 @@ package com.example.notes.loftcoinkotlin.core.data
 
 import androidx.lifecycle.LiveData
 import com.example.notes.loftcoinkotlin.data.CoinsDataModel
+import com.example.notes.loftcoinkotlin.data.currency.Currency
 import com.example.notes.loftcoinkotlin.data.net.NetworkCoin
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 interface CoinsRepository {
 
     fun fetchListingsDatabase(query: Query): Observable<List<CoinsDataModel>>
+
+    fun coin(id: Long, currency: Currency): Single<CoinsDataModel>
 }
 
 data class Query(
@@ -28,7 +32,8 @@ data class Query(
             return Query(
                 currency,
                 forceUpdate,
-                sortBy )
+                sortBy
+            )
         }
     }
 

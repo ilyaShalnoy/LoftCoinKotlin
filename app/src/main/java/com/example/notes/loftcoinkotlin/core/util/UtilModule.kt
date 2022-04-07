@@ -11,4 +11,7 @@ abstract class UtilModule {
 
     @Binds
     abstract fun schedulers(impl: RxSchedulersImpl): RxSchedulers
+
+    @Binds
+    abstract fun notifier(impl: NotifierImpl): Notifier
 }

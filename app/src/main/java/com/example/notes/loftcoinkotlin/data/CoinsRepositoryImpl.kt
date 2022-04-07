@@ -5,10 +5,12 @@ import com.example.notes.loftcoinkotlin.core.data.CoinsRepository
 import com.example.notes.loftcoinkotlin.core.data.Query
 import com.example.notes.loftcoinkotlin.core.data.SortBy
 import com.example.notes.loftcoinkotlin.core.util.RxSchedulers
+import com.example.notes.loftcoinkotlin.data.currency.Currency
 import com.example.notes.loftcoinkotlin.data.database.CacheCoin
 import com.example.notes.loftcoinkotlin.data.database.LoftDatabase
 import com.example.notes.loftcoinkotlin.data.net.CoinsApi
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
 import java.util.concurrent.Callable
@@ -25,7 +27,6 @@ class CoinsRepositoryImpl
 
 
     override fun fetchListingsDatabase(query: Query): Observable<List<CoinsDataModel>> {
-        Log.d("forceUpdate", query.forceUpdate.toString())
         return Observable.fromCallable {
             query.forceUpdate!! || database.getDao().coinsCount() == 0
         }.switchMap {
@@ -42,6 +43,16 @@ class CoinsRepositoryImpl
         }.map {
             it.map { cacheCoin -> cacheCoin.to() }
         }.subscribeOn(schedulers.io())
+    }
+
+    override fun coin(id: Long, currency: Currency): Single<CoinsDataModel> {
+    return fetchListingsDatabase(Query.currency(currency.getCode()).forceUpdate(false).build())
+        .switchMapSingle {
+            database.getDao().fetchOne(id).map {
+                it.to()
+            }
+        }
+        .firstOrError()
     }
 
     private fun fetchFromDb(query: Query): Observable<List<CacheCoin>> {

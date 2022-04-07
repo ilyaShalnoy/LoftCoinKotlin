@@ -60,15 +60,11 @@ class RatesViewModel @Inject constructor(
             _isRefreshing.onNext(false)
         }
 
-
     fun refresh() {
         pullToRefresh.onNext(Void.TYPE)
     }
 
     fun switchSortingOrder() {
-        val sort = SortBy.values()[sortingIndex++ % SortBy.values().size]
-        sortBy.onNext(sort)
+        sortBy.onNext(SortBy.values()[sortingIndex++ % SortBy.values().size])
     }
-
-
 }

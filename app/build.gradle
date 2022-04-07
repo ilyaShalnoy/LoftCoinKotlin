@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,6 +40,10 @@ android {
     viewBinding {
         enabled = true
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -74,6 +79,8 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
+    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+
     //Room
     implementation("androidx.room:room-runtime:2.4.1")
     implementation("androidx.room:room-rxjava3:2.4.1")
@@ -92,5 +99,10 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-messaging:23.0.1'
 
 }

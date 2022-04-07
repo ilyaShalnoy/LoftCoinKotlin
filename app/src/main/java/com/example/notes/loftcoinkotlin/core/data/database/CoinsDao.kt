@@ -7,12 +7,16 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.notes.loftcoinkotlin.data.database.CacheCoin
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface CoinsDao {
 
     @Query("SELECT * FROM CacheCoin")
     fun fetchAll(): Observable<List<CacheCoin>>
+
+    @Query("SELECT * FROM CacheCoin WHERE id =:id")
+    fun fetchOne(id: Long): Single<CacheCoin>
 
     @Query("SELECT * FROM CacheCoin ORDER BY rank ASC")
     fun fetchAllSortByRank(): Observable<List<CacheCoin>>
@@ -25,4 +29,5 @@ interface CoinsDao {
 
     @Query("SELECT COUNT(id) FROM CacheCoin")
     fun coinsCount(): Int
+
 }

@@ -1,12 +1,23 @@
 package com.example.notes.loftcoinkotlin.ui.wallets
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notes.loftcoinkotlin.BuildConfig
+import com.example.notes.loftcoinkotlin.core.util.BalanceFormatter
+import com.example.notes.loftcoinkotlin.core.util.ImageLoader
+import com.example.notes.loftcoinkotlin.core.util.OutlineCircle
+import com.example.notes.loftcoinkotlin.core.util.PriceFormatter
+import com.example.notes.loftcoinkotlin.data.wallets.Wallet
 import com.example.notes.loftcoinkotlin.databinding.LiWalletBinding
+import javax.inject.Inject
 
-class WalletsAdapter : RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder>() {
+class WalletsAdapter @Inject constructor(
+    private val priceFormatter: PriceFormatter,
+    private val balanceFormatter: BalanceFormatter,
+    private val imageLoader: ImageLoader
+) : ListAdapter<Wallet, WalletsAdapter.WalletsViewHolder>(WalletsDiffCallback()) {
 
     private lateinit var inflater: LayoutInflater
 
@@ -18,9 +29,6 @@ class WalletsAdapter : RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder>() 
         holder.bind(position)
     }
 
-    override fun getItemCount(): Int {
-        return 5
-    }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -28,10 +36,20 @@ class WalletsAdapter : RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder>() 
     }
 
 
-    inner class WalletsViewHolder(binding: LiWalletBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class WalletsViewHolder(private val binding: LiWalletBinding) : RecyclerView.ViewHolder(binding.root) {
+
 
         fun bind(position: Int) {
+            val wallet = getItem(position)
+            binding.titleCryptoCard.text = wallet.getCoin().getSymbol()
+            binding.balanceTextCrypto.text = balanceFormatter.format(wallet)
+            val balance = wallet.getBalance() * wallet.getCoin().getPrice()
+            binding.balanceTextCurrency.text = priceFormatter.format(wallet.getCoin().getCurrencyCode(), balance)
+            imageLoader
+                .load(BuildConfig.IMG_ENDPOINT + wallet.getCoin().getId() + ".png")
+                .into(binding.logoCryptoCard)
 
+            OutlineCircle().apply(binding.logoCryptoCard)
         }
     }
 }
