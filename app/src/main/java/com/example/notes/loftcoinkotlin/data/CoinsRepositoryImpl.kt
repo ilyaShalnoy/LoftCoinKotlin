@@ -13,9 +13,11 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
+import java.util.*
 import java.util.concurrent.Callable
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.collections.ArrayList
 
 @Singleton
 class CoinsRepositoryImpl
@@ -45,14 +47,24 @@ class CoinsRepositoryImpl
         }.subscribeOn(schedulers.io())
     }
 
-    override fun coin(id: Long, currency: Currency): Single<CoinsDataModel> {
-    return fetchListingsDatabase(Query.currency(currency.getCode()).forceUpdate(false).build())
-        .switchMapSingle {
-            database.getDao().fetchOne(id).map {
-                it.to()
+    override fun topCoins(currency: Currency): Observable<List<CoinsDataModel>> {
+        return fetchListingsDatabase(Query.currency(currency.getCode()).forceUpdate(false).build())
+            .switchMap { coins ->
+                database.getDao().fetchTop(3)
+            }.map {
+                it.map { cacheCoin -> cacheCoin.to() }
             }
-        }
-        .firstOrError()
+    }
+
+
+    override fun coin(id: Long, currency: Currency): Single<CoinsDataModel> {
+        return fetchListingsDatabase(Query.currency(currency.getCode()).forceUpdate(false).build())
+            .switchMapSingle {
+                database.getDao().fetchOne(id).map {
+                    it.to()
+                }
+            }
+            .firstOrError()
     }
 
     private fun fetchFromDb(query: Query): Observable<List<CacheCoin>> {

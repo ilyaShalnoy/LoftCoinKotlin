@@ -16,4 +16,5 @@ abstract class ConverterComponent {
 
     abstract fun viewModelFactory(): ViewModelProvider.Factory
 
+    abstract fun coinsSheetAdapter(): CoinsSheetAdapter
 }

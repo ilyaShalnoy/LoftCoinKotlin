@@ -3,6 +3,7 @@ package com.example.notes.loftcoinkotlin.ui.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.example.notes.loftcoinkotlin.ui.LoftFragmentFactory
+import com.example.notes.loftcoinkotlin.ui.converter.CoinsSheet
 import com.example.notes.loftcoinkotlin.ui.converter.ConverterFragment
 import com.example.notes.loftcoinkotlin.ui.currency.CurrencyDialogFragment
 import com.example.notes.loftcoinkotlin.ui.rates.RatesFragment
@@ -34,5 +35,8 @@ abstract class MainModule {
     @[IntoMap ClassKey(CurrencyDialogFragment::class)]
     abstract fun currencyDialogFragment(impl: CurrencyDialogFragment): Fragment
 
+    @Binds
+    @[IntoMap ClassKey(CoinsSheet::class)]
+    abstract fun coinsSheet(impl: CoinsSheet): Fragment
 
 }

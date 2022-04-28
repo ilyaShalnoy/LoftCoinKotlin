@@ -5,6 +5,7 @@ import com.example.notes.loftcoinkotlin.data.CoinsDataModel
 import com.example.notes.loftcoinkotlin.data.currency.Currency
 import com.example.notes.loftcoinkotlin.data.net.NetworkCoin
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableSource
 import io.reactivex.rxjava3.core.Single
 
 interface CoinsRepository {
@@ -12,6 +13,8 @@ interface CoinsRepository {
     fun fetchListingsDatabase(query: Query): Observable<List<CoinsDataModel>>
 
     fun coin(id: Long, currency: Currency): Single<CoinsDataModel>
+
+    fun topCoins(currency: Currency): Observable<List<CoinsDataModel>>
 }
 
 data class Query(

@@ -30,4 +30,7 @@ interface CoinsDao {
     @Query("SELECT COUNT(id) FROM CacheCoin")
     fun coinsCount(): Int
 
+    @Query("SELECT * FROM CacheCoin ORDER BY rank ASC LIMIT :limit")
+    fun fetchTop(limit: Int): Observable<List<CacheCoin>>
+
 }
