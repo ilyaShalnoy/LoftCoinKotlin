@@ -2,29 +2,45 @@ package com.example.notes.loftcoinkotlin.ui.currency
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.loftcoinkotlin.R
-import com.example.notes.loftcoinkotlin.core.data.currency.CurrencyRepository
-import com.example.notes.loftcoinkotlin.data.currency.CurrencyRepositoryImpl
-
+import com.example.notes.loftcoinkotlin.core.BaseComponent
+import com.example.notes.loftcoinkotlin.data.currency.Currency
 import com.example.notes.loftcoinkotlin.databinding.DialogCurrencyBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import javax.inject.Inject
 
-class CurrencyDialogFragment : DialogFragment() {
+class CurrencyDialogFragment @Inject constructor(baseComponent: BaseComponent) : DialogFragment() {
 
     private lateinit var binding: DialogCurrencyBinding
 
-    private lateinit var currencyRepository: CurrencyRepository
+    private val component = DaggerCurrencyComponent.builder()
+        .baseComponent(baseComponent)
+        .build()
+
+    private lateinit var viewModel: CurrencyViewModel
 
     private lateinit var adapter: CurrencyDialogAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currencyRepository = CurrencyRepositoryImpl(requireContext())
-        adapter = CurrencyDialogAdapter()
-        currencyRepository.availableCurrencies().observe(this) {
+
+        viewModel = ViewModelProvider(this, component.viewModelFactory())[CurrencyViewModel::class.java]
+        adapter = CurrencyDialogAdapter(object : CurrencyDialogAdapter.OnItemDialogClickListener {
+            override fun onItemClick(currency: Currency) {
+                viewModel.updateCurrencies(currency)
+                Thread.sleep(300)
+                dismissAllowingStateLoss()
+            }
+        })
+
+        viewModel.allCurrencies().observe(this) {
             adapter.submitList(it)
         }
     }
@@ -37,6 +53,7 @@ class CurrencyDialogFragment : DialogFragment() {
             .setTitle(R.string.choose_currency)
             .setView(binding.root)
             .create()
+
     }
 
     override fun onDestroyView() {

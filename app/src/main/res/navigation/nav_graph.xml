@@ -25,4 +25,9 @@
         android:name="com.example.notes.loftcoinkotlin.ui.currency.CurrencyDialogFragment"
         android:label="CurrencyDialogFragment"
         tools:layout="@layout/dialog_currency"/>
+    <dialog
+        android:id="@+id/coins_sheet"
+        android:name="com.example.notes.loftcoinkotlin.ui.converter.CoinsSheet"
+        android:label="@string/choose_currency"
+        tools:layout="@layout/li_sheet_dialog"/>
 </navigation>

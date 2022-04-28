@@ -6,6 +6,7 @@ import android.os.StrictMode
 import com.example.notes.loftcoinkotlin.core.BaseComponent
 import com.example.notes.loftcoinkotlin.core.DaggerAppComponent
 import com.example.notes.loftcoinkotlin.core.util.DebugTree
+import com.google.firebase.messaging.FirebaseMessaging
 import timber.log.Timber
 
 class LoftApp : Application() {
@@ -22,6 +23,14 @@ class LoftApp : Application() {
         if (BuildConfig.DEBUG) {
             StrictMode.enableDefaults()
             Timber.plant(DebugTree());
+        }
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.e(task.exception, "Fetching FCM registration token failed")
+                return@addOnCompleteListener
+            }
+            Timber.d("fcm: %s", task.result)
         }
     }
 }

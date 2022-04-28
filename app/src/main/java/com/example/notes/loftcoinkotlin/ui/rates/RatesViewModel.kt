@@ -1,41 +1,70 @@
 package com.example.notes.loftcoinkotlin.ui.rates
 
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.notes.loftcoinkotlin.core.data.CoinsRepository
-import com.example.notes.loftcoinkotlin.data.net.Coin
-import java.lang.Exception
-import java.util.concurrent.Executors
-import java.util.concurrent.Future
+import com.example.notes.loftcoinkotlin.core.data.Query
+import com.example.notes.loftcoinkotlin.core.data.CurrencyRepository
+import com.example.notes.loftcoinkotlin.core.data.SortBy
+import com.example.notes.loftcoinkotlin.core.util.RxSchedulers
+import com.example.notes.loftcoinkotlin.data.CoinsDataModel
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.subjects.Subject
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
-class RatesViewModel @Inject constructor(private val repository: CoinsRepository) : ViewModel() {
+class RatesViewModel @Inject constructor(
+    private val coinsRepository: CoinsRepository,
+    private val currencyRepository: CurrencyRepository,
+    private val schedulers: RxSchedulers
+) : ViewModel() {
 
-    private val _coinsLiveData = MutableLiveData<List<Coin>>()
-    val coinsLiveData get() = _coinsLiveData
+    private val _isRefreshing: Subject<Boolean> = BehaviorSubject.create()
 
-    private val _isRefreshing = MutableLiveData<Boolean>()
-    val isRefreshing get() = _isRefreshing
+    val isRefreshing: Observable<Boolean>
+        get() = _isRefreshing.observeOn(schedulers.main())
 
-    private lateinit var future: Future<*>
+    private val pullToRefresh = BehaviorSubject.createDefault(Void.TYPE)
 
-    private val executor = Executors.newSingleThreadExecutor()
+    private val sortBy = BehaviorSubject.createDefault(SortBy.RANK)
+
+    private val forceUpdate = AtomicBoolean()
+
+    private var sortingIndex = 1
+
+    // qb = QueryBuilder
+    fun coins(): Observable<List<CoinsDataModel>> = pullToRefresh
+        .observeOn(schedulers.main())
+        .map {
+            Query.Builder
+        }.switchMap { qb ->
+            currencyRepository.currency().map { c ->
+                qb.currency(c.getCode())
+            }
+        }.doOnNext {
+            forceUpdate.set(true)
+        }.doOnNext {
+            _isRefreshing.onNext(true)
+        }.switchMap { qb ->
+            sortBy.map { s ->
+                qb.sortBy(s)
+            }
+        }.map { qb ->
+            qb.forceUpdate(forceUpdate.getAndSet(false))
+        }.map {
+            Query.build()
+        }.switchMap { query ->
+            coinsRepository.fetchListingsDatabase(query)
+        }.doOnEach {
+            _isRefreshing.onNext(false)
+        }
 
     fun refresh() {
-        _isRefreshing.postValue(true)
-        future = executor.submit {
-            try {
-                _coinsLiveData.postValue(repository.fetchListings("USD"))
-                isRefreshing.postValue(false)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        pullToRefresh.onNext(Void.TYPE)
     }
 
-    override fun onCleared() {
-        future.cancel(true)
+    fun switchSortingOrder() {
+        sortBy.onNext(SortBy.values()[sortingIndex++ % SortBy.values().size])
     }
-
-
 }

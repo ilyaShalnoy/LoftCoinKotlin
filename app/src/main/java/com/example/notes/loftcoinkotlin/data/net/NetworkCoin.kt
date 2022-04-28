@@ -1,8 +1,10 @@
 package com.example.notes.loftcoinkotlin.data.net
 
+import com.example.notes.loftcoinkotlin.core.Mapper
+import com.example.notes.loftcoinkotlin.data.CoinsDataModel
 import com.squareup.moshi.Json
 
-data class Coin(
+data class NetworkCoin(
     @Json(name = "id")
     private val id: Int,
     @Json(name = "name")
@@ -12,12 +14,10 @@ data class Coin(
     @Json(name = "cmc_rank")
     private val rank: Int,
     @Json(name = "quote")
-    private val quote: Map<String, Quote>
-) {
-    fun getId() = id
-    fun getSymbol() = symbol
+    private val quote: Map<String, Quote>,
+) : Mapper<CoinsDataModel> {
 
-    fun price(): Double {
+    private fun price(): Double {
         val iterator: Iterator<Quote> = quote.values.iterator()
         return if (iterator.hasNext())
             iterator.next().getPrice()
@@ -25,12 +25,17 @@ data class Coin(
             0.toDouble()
     }
 
-    fun change24h(): Double {
+    private fun change24h(): Double {
         val iterator: Iterator<Quote> = quote.values.iterator()
         return if (iterator.hasNext())
             iterator.next().getChange()
         else
             0.toDouble()
+    }
+
+
+    override fun to(): CoinsDataModel {
+        return CoinsDataModel(id, name, symbol, rank, price(), change24h(), "USD")
     }
 }
 
