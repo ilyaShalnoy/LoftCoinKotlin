@@ -5,9 +5,7 @@ import com.example.notes.loftcoinkotlin.core.data.CoinsRepository
 import com.example.notes.loftcoinkotlin.core.data.CurrencyRepository
 import com.example.notes.loftcoinkotlin.core.util.RxSchedulers
 import com.example.notes.loftcoinkotlin.data.CoinsDataModel
-import com.example.notes.loftcoinkotlin.data.database.CacheCoin
 import io.reactivex.rxjava3.core.Observable
-import timber.log.Timber
 import javax.inject.Inject
 
 class ConverterViewModel @Inject constructor(
@@ -20,8 +18,7 @@ class ConverterViewModel @Inject constructor(
         return currencyRepository.currency()
             .switchMap { currency ->
                 coinsRepository.topCoins(currency)
-            }
-            .replay(1)
+            }.replay(1)
             .autoConnect()
             .observeOn(rxSchedulers.main())
     }

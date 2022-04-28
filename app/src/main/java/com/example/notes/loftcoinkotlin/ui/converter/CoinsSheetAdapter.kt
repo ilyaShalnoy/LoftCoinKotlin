@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 class CoinsSheetAdapter @Inject constructor(
     private val imageLoader: ImageLoader,
-    private val onItemCoinsSheetClickListener: OnItemCoinsSheetClickListener
     ) : ListAdapter<CoinsDataModel, CoinsSheetViewHolder>(DiffCallback()) {
 
     private lateinit var inflater: LayoutInflater
@@ -27,7 +26,7 @@ class CoinsSheetAdapter @Inject constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinsSheetViewHolder {
-      return CoinsSheetViewHolder(LiSheetDialogBinding.inflate(inflater, parent, false), onItemCoinsSheetClickListener)
+      return CoinsSheetViewHolder(LiSheetDialogBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: CoinsSheetViewHolder, position: Int) {
@@ -40,7 +39,6 @@ class CoinsSheetAdapter @Inject constructor(
 
     inner class CoinsSheetViewHolder(
         private val binding: LiSheetDialogBinding,
-        private val onItemCoinsSheetClickListener: OnItemCoinsSheetClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
@@ -49,10 +47,6 @@ class CoinsSheetAdapter @Inject constructor(
             imageLoader
                 .load(BuildConfig.IMG_ENDPOINT + item.getId() + ".png")
                 .into(binding.logo)
-
-            itemView.setOnClickListener {
-                onItemCoinsSheetClickListener.onItemClick(getItem(position))
-            }
         }
 
     }
